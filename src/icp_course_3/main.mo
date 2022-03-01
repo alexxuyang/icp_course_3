@@ -1,3 +1,4 @@
+import Blob "mo:base/Blob";
 import Text "mo:base/Text";
 import Nat "mo:base/Nat";
 import Types "types";
@@ -19,7 +20,7 @@ actor Counter {
 
     public shared query func http_request(request: Types.HttpRequest): async Types.HttpResponse {
         {
-            body = Text.encodeUtf8("<html><body><h1>" # Nat.toText(currentValue) # "</h1><body></html>");
+            body = Blob.toArray(Text.encodeUtf8("<html><body><h1>" # Nat.toText(currentValue) # "</h1></body></html>"));
             headers = [];
             streaming_strategy = null;
             status_code = 200;
